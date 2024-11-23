@@ -140,7 +140,7 @@ with open('D:/fatemeh_ajam/lightningChart/A/license-key', 'r') as f:
 lc.set_license(mylicensekey)
 
 # Filter the data for hazardous and non-hazardous wastes
-filtered_data = filtered_data[filtered_data['Hazardousness'].isin(['Hazardous[HAZ]', 'Non-hazardous[NHAZ]'])]
+filtered_data = filtered_data[sheet_data['Hazardousness'].isin(['Hazardous[HAZ]', 'Non-hazardous[NHAZ]'])]
 
 # Group data by year and hazardousness to calculate total values for each year
 grouped_data = filtered_data.groupby(['Year', 'Hazardousness'])['VALUE'].sum().unstack()
