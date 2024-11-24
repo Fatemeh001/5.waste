@@ -44,7 +44,7 @@ color = heatmap_series.set_palette_coloring(
 chart.add_legend().add(color)
 heatmap_series.set_intensity_interpolation('bilinear')
 
-
+# ---------------------------------------------------------------------------------------------------------------------
 # chart 2: Annual Trends of Hazardous and Non-Hazardous Waste Production
 filtered_data = filtered_data[filtered_data['Hazardousness'].isin(['Hazardous[HAZ]', 'Non-hazardous[NHAZ]'])]
 grouped_data = filtered_data.groupby(['Year', 'Hazardousness'])['VALUE'].sum().unstack()
@@ -90,7 +90,7 @@ angular_axis.set_division(len(years))
 angular_axis.set_tick_labels([str(year) for year in years])
 
 
-
+# ---------------------------------------------------------------------------------------------------------------------
 # chart 3: Yearly Waste Intensity by Hazardousness
 filtered_data = filtered_data[sheet_data['Hazardousness'].isin(['Hazardous[HAZ]', 'Non-hazardous[NHAZ]'])]
 
@@ -129,7 +129,7 @@ radial_axis = chart.get_radial_axis()
 radial_axis.set_division(len(years))
 radial_axis.set_tick_labels([str(year) for year in years])
 
-
+# ---------------------------------------------------------------------------------------------------------------------
 # chart 4: Relative Contributions of Economic Activities to Waste Production
 chart = dashboard.PolarChart(column_index=1, row_index=1)
 chart.set_title("Relative Contributions of Economic Activities")
