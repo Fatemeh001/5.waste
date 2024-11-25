@@ -60,7 +60,7 @@ for i, activity in enumerate(activities):
 
 box_series = chart.add_box_series()
 
-box_series.set_palette_coloring(
+color = box_series.set_palette_coloring(
     steps=[
         {'value': 0.0, 'color': lc.Color('blue')},
         {'value': 0.25, 'color': lc.Color('yellow')},
@@ -71,7 +71,7 @@ box_series.set_palette_coloring(
     percentage_values=True,
     look_up_property='y'
 )
-
+chart.add_legend().add(color)
 def generate_static_boxes(activities, years):
     boxes = []
     for i, activity_full in enumerate(filtered_data['NACE Rev. 2 Activity'].unique()):
@@ -86,9 +86,10 @@ def generate_static_boxes(activities, years):
                 'zCenter': i,
                 'xSize': 2.0,
                 'ySize': float(total_value),
-                'zSize': 1.0
+                'zSize': 0.5
             })
     return boxes
+box_series.set_rounded_edges(1)
 
 static_boxes = generate_static_boxes(activities, years)
 box_series.add(static_boxes)

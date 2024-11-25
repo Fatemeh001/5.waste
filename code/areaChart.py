@@ -31,7 +31,6 @@ for i, category in enumerate(hazardousness_categories):
     series = chart.add_area_series()
     series.set_name(category)
     series.add(x_values, stacked_data[:, i])
-    series.set(False)
 
 x_axis = chart.get_default_x_axis()
 x_axis.set_title("Year")
