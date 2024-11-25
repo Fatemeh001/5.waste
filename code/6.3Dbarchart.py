@@ -16,6 +16,7 @@ filtered_data = data[
     (data['Waste Category'] == 'Chemical wastes[W02A]')
 ]
 
+
 top_activities = (
     filtered_data.groupby('NACE Rev. 2 Activity')['VALUE'].sum()
     .sort_values(ascending=False)
@@ -32,7 +33,7 @@ years = sorted([int(year) for year in filtered_data['Year'].unique()])
 
 chart = lc.Chart3D(
     theme=lc.Themes.Dark,
-    title="3D Visualization of Chemical Wastes by Activity"
+    title="Top 5 Activities by Total Waste Value"
 )
 
 chart.get_default_x_axis().set_title("Year")
@@ -59,18 +60,18 @@ for i, activity in enumerate(activities):
 
 box_series = chart.add_box_series()
 
-color= box_series.set_palette_coloring(
+box_series.set_palette_coloring(
     steps=[
         {'value': 0.0, 'color': lc.Color('blue')},
-        {'value': 0.25, 'color': lc.Color('green')},
-        {'value': 0.5, 'color': lc.Color('yellow')},
-        {'value': 0.75, 'color': lc.Color('orange')},
+        {'value': 0.25, 'color': lc.Color('yellow')},
+        {'value': 0.5, 'color': lc.Color('orange')},
+        {'value': 0.75, 'color': lc.Color('green')},
         {'value': 1.0, 'color': lc.Color('red')}
     ],
     percentage_values=True,
     look_up_property='y'
 )
-chart.add_legend().add(color)
+
 def generate_static_boxes(activities, years):
     boxes = []
     for i, activity_full in enumerate(filtered_data['NACE Rev. 2 Activity'].unique()):
