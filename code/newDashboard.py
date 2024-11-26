@@ -18,13 +18,14 @@ filtered_data = data[
     (data['VALUE'].notnull()) &
     (data['Waste Category'] == 'Acid, alkaline or saline wastes[W012]')
 ]
-all_activities_full = data.groupby(["Year", "NACE Rev. 2 Activity"])["VALUE"].sum().unstack()
+all_activities_full = filtered_data.groupby(["Year", "NACE Rev. 2 Activity"])["VALUE"].sum().unstack()
 selected_activities = [
-    'Mining and quarrying (B)',
-    'Services (except wholesale of waste and scrap)  (G-U_X_G4677)',
-    'Construction (F)',
-    'Manufacturing (C)', 'Manufacture of food products; beverages and tobacco products (C10-C12)',
-    'Waste collection, treatment and disposal activities; materials recovery (E38)'
+    'All NACE activities plus households (TOTAL_HH)',
+    'Manufacturing (C)',
+    'Manufacture of chemical, pharmaceutical, rubber and plastic products (C20-C22)',
+    'Manufacture of food products; beverages and tobacco products (C10-C12)',
+    'Manufacture of computer, electronic and optical products, electrical equipment, motor vehicles and other transport equipment (C26-C30)',
+    'Manufacture of furniture; jewellery, musical instruments, toys; repair and installation of machinery and equipment (C31-C33)'
 ]
 filtered_activities = all_activities_full[selected_activities]
 short_titles = [activity.split("(")[-1].strip(")") for activity in filtered_activities.columns]

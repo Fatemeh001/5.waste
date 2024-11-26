@@ -8,10 +8,12 @@ with open('D:/fatemeh_ajam/lightningChart/A/license-key', 'r') as f:
     mylicensekey = f.read().strip()
 lc.set_license(mylicensekey)
 
-file_path = 'dataset/acid.xlsx'
-sheet1_data = pd.read_excel(file_path, sheet_name="Unpivoted")
+file_path = 'dataset/Batteries.xlsx'
+sheet_name = 'Unpivoted'
+data = pd.read_excel(file_path, sheet_name=sheet_name)
 
-all_activities_full = sheet1_data.groupby(["Year", "NACE Rev. 2 Activity"])["VALUE"].sum().unstack()
+
+all_activities_full = data.groupby(["Year", "NACE Rev. 2 Activity"])["VALUE"].sum().unstack()
 
 years = all_activities_full.index.astype(int).tolist()
 all_activities_full = all_activities_full.astype(float) / 1e6
