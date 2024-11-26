@@ -64,8 +64,8 @@ color = box_series.set_palette_coloring(
     steps=[
         {'value': 0.0, 'color': lc.Color('blue')},
         {'value': 0.25, 'color': lc.Color('yellow')},
-        {'value': 0.5, 'color': lc.Color('orange')},
-        {'value': 0.75, 'color': lc.Color('green')},
+        {'value': 0.5, 'color': lc.Color('green')},
+        {'value': 0.75, 'color': lc.Color('orange')},
         {'value': 1.0, 'color': lc.Color('red')}
     ],
     percentage_values=True,
@@ -84,12 +84,12 @@ def generate_static_boxes(activities, years):
                 'xCenter': float(year),
                 'yCenter': float(total_value) / 2,
                 'zCenter': i,
-                'xSize': 2.0,
+                'xSize': 2,
                 'ySize': float(total_value),
-                'zSize': 0.5
+                'zSize': 1
             })
     return boxes
-box_series.set_rounded_edges(1)
+box_series.set_rounded_edges(0.4)
 
 static_boxes = generate_static_boxes(activities, years)
 box_series.add(static_boxes)

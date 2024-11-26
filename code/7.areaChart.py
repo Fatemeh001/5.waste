@@ -48,3 +48,5 @@ y_axis.set_title("Value (Tonnes)")
 chart.add_legend(data=chart)
 
 chart.open()
+
+

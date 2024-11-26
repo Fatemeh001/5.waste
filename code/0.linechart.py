@@ -1,48 +1,4 @@
-# import lightningchart as lc
-# import pandas as pd
 
-# with open('D:/fatemeh_ajam/lightningChart/A/license-key', 'r') as f:
-#     mylicensekey = f.read().strip()
-# lc.set_license(mylicensekey)
-
-
-# # Load your dataset
-# file_path = 'dataset/acid.xlsx'  
-# sheet1_data = pd.read_excel(file_path, sheet_name="Unpivoted")
-
-
-
-
-# # Process data to get required format
-# all_activities_full = sheet1_data.groupby(["Year", "NACE Rev. 2 Activity"])["VALUE"].sum().unstack()
-
-# # Extract shortened titles from activities (text inside parentheses)
-# short_titles = [activity.split("(")[-1].strip(")") for activity in all_activities_full.columns]
-
-# # Initialize a single ChartXY
-# chart = lc.ChartXY(
-#     theme=lc.Themes.Dark,
-#     title="Waste Generation Trends"
-# )
-
-# # Configure title position
-# chart.set_title_position("center-top")
-
-# # Add spline series for each activity with colors
-# for activity, short_title in zip(all_activities_full.columns, short_titles):
-#     spline_series = chart.add_spline_series()
-#     spline_series.append_samples(
-#         x_values=all_activities_full.index.tolist(),
-#         y_values=all_activities_full[activity].fillna(0).tolist()
-#     )
-#     # spline_series.set_title(short_title)  # Set legend for the series
-
-# # Enable zoom and pan interactions
-# chart.set_mouse_interaction_wheel_zoom(True)
-# chart.set_mouse_interaction_pan(True)
-
-# # Open the chart
-# chart.open()
 
 import lightningchart as lc
 import pandas as pd
@@ -51,11 +7,17 @@ with open('D:/fatemeh_ajam/lightningChart/A/license-key', 'r') as f:
     mylicensekey = f.read().strip()
 lc.set_license(mylicensekey)
 
-# Load your dataset
-file_path = 'dataset/acid.xlsx'
-sheet1_data = pd.read_excel(file_path, sheet_name="Unpivoted")
+file_path = 'dataset/Batteries.xlsx'
+sheet_name = 'Unpivoted'
+data = pd.read_excel(file_path, sheet_name=sheet_name)
 
-all_activities_full = sheet1_data.groupby(["Year", "NACE Rev. 2 Activity"])["VALUE"].sum().unstack()
+filtered_data = data[
+    (data['VALUE'] != 0) &
+    (data['VALUE'].notnull()) &
+    (data['Waste Category'] == 'Acid, alkaline or saline wastes[W012]')
+]
+
+all_activities_full = data.groupby(["Year", "NACE Rev. 2 Activity"])["VALUE"].sum().unstack()
 
 # Define selected activities explicitly
 selected_activities = [
